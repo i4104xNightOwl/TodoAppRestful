@@ -9,7 +9,7 @@ namespace RestfulDemo.Database
 
         public static void connect(String fileName = "database.sqlite")
         {
-            string _strConnect = $"Data Source={fileName};Version=3;";
+            string _strConnect = $"Data Source={fileName};";
             SQLiteManager._sql = new SqliteConnection(_strConnect);
         }
 
