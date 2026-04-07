@@ -5,6 +5,9 @@ using RestfulDemo.Services;
 
 namespace RestfulDemo.Controllers
 {
+    /// <summary>
+    /// Controller quản lý các thao tác CRUD cho Todo.
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class TodoController : ControllerBase
@@ -16,6 +19,10 @@ namespace RestfulDemo.Controllers
             _todoService = todoService;
         }
 
+        /// <summary>
+        /// Lấy danh sách tất cả các Todo.
+        /// </summary>
+        /// <returns>Danh sách các Todo.</returns>
         [HttpGet("/todo", Name = "getListTodo")]
         public ActionResult<TodoModel[]> Get()
         {
@@ -23,6 +30,11 @@ namespace RestfulDemo.Controllers
             return Ok(todos);
         }
 
+        /// <summary>
+        /// Lấy thông tin chi tiết của một Todo theo ID.
+        /// </summary>
+        /// <param name="id">ID của Todo cần lấy.</param>
+        /// <returns>Thông tin Todo tương ứng.</returns>
         [HttpGet("/todo/{id}", Name = "getByID")]
         public ActionResult<TodoModel> GetById(string id)
         {
@@ -33,6 +45,11 @@ namespace RestfulDemo.Controllers
             return Ok(todo);
         }
 
+        /// <summary>
+        /// Tạo mới một Todo.
+        /// </summary>
+        /// <param name="model">Thông tin Todo cần tạo.</param>
+        /// <returns>Todo vừa được tạo.</returns>
         [HttpPost("/todo", Name = "create")]
         public ActionResult<TodoModel> Create([FromBody] TodoModel model)
         {
@@ -46,6 +63,11 @@ namespace RestfulDemo.Controllers
             return CreatedAtRoute("getByID", new { id = createdTodo.Id }, createdTodo);
         }
 
+        /// <summary>
+        /// Cập nhật thông tin một Todo.
+        /// </summary>
+        /// <param name="model">Thông tin Todo cần cập nhật.</param>
+        /// <returns>Todo sau khi cập nhật.</returns>
         [HttpPut("/todo", Name = "update")]
         public ActionResult<TodoModel> Update([FromBody] TodoModel model)
         {
@@ -59,6 +81,11 @@ namespace RestfulDemo.Controllers
             return Ok(updatedTodo);
         }
 
+        /// <summary>
+        /// Xóa một Todo theo ID.
+        /// </summary>
+        /// <param name="id">ID của Todo cần xóa.</param>
+        /// <returns>Không có nội dung trả về.</returns>
         [HttpDelete("/todo/{id}", Name = "delete")]
         public ActionResult Delete(string id)
         {
