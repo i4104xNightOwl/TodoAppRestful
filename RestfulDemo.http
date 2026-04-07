@@ -1,11 +1,45 @@
 @RestfulDemo_HostAddress = http://localhost:5195
+@ContentType = application/json
+@todoId = 8900546b-92ec-45a0-8bf6-52cfc83ecbca
 
 ###
-
-GET {{RestfulDemo_HostAddress}}/todo/
-Accept: application/text
+### 1. Lấy danh sách tất cả Todo
+GET {{RestfulDemo_HostAddress}}/todo
+Accept: {{ContentType}}
 
 ###
+### 2. Tạo một Todo mới
+POST {{RestfulDemo_HostAddress}}/todo
+Content-Type: {{ContentType}}
 
-GET {{RestfulDemo_HostAddress}}/todo/1
-Accept: application/text
+{
+  "task": "Học C#",
+  "content": "Học lập trình C# cơ bản",
+  "status": 1,
+  "estimateTime": 5,
+  "isCompleted": false
+}
+
+###
+### 3. Lấy Todo theo ID (thay {id} bằng ID thực tế)
+GET {{RestfulDemo_HostAddress}}/todo/{{todoId}}
+Accept: {{ContentType}}
+
+###
+### 4. Cập nhật Todo (phải có ID)
+PUT {{RestfulDemo_HostAddress}}/todo
+Content-Type: {{ContentType}}
+
+{
+  "id": "{{todoId}}",
+  "task": "Học C# nâng cao",
+  "content": "Học lập trình C# nâng cao - Async/Await",
+  "status": 3,
+  "estimateTime": 8,
+  "isCompleted": false
+}
+
+###
+### 5. Xóa Todo theo ID
+DELETE {{RestfulDemo_HostAddress}}/todo/{{todoId}}
+Accept: {{ContentType}}

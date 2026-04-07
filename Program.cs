@@ -1,23 +1,25 @@
 using RestfulDemo.Database;
+using RestfulDemo.Services;
+using SQLitePCL;
+
+Batteries.Init();
 
 SQLiteManager.connect("todo.sqlite");
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddScoped<TodoService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
